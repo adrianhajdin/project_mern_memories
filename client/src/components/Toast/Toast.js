@@ -1,31 +1,44 @@
-import React from 'react'
+import React from 'react';
+import { Snackbar, Button } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 
-import { Cinnamon } from "butter-toast";
-import { DeleteSweep, AssignmentTurnedIn } from "@material-ui/icons";
+import useStyles from './styles';
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
-const Toast = ({ action }) => {
-    switch (action) {
-        case 'create':
-            return (
-                <Cinnamon.Crisp 
-                    title="Post Box"
-                    content="Submitted successfully"
-                    scheme={Cinnamon.Crisp.SCHEME_PURPLE}
-                    icon={<AssignmentTurnedIn />}
-                />
-            );
-        case 'delete':
-            return (
-                <Cinnamon.Crisp 
-                    title="Post Box"
-                    content="Deleted successfully"
-                    scheme={Cinnamon.Crisp.SCHEME_PURPLE}
-                    icon={<DeleteSweep />}
-                />
-            );
-        default:
-            return null;
+{/* <Alert severity="error">This is an error message!</Alert>
+        <Alert severity="warning">This is a warning message!</Alert>
+        <Alert severity="info">This is an information message!</Alert>
+        <Alert severity="success">This is a success message!</Alert> */}
+
+
+const CustomizedSnackbars = ({ action }) => {
+    const [open, setOpen] = React.useState(true);
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
+  switch (action) {
+    case 'create': 
+        return (
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">Memory successfully created</Alert>
+            </Snackbar>
+        );
+    case 'delete':
+        return (
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">Memory successfully deleted </Alert>
+            </Snackbar>
+        );
+    default:
+        return null;  
     }
 }
 
-export default Toast;
+export default CustomizedSnackbars;
