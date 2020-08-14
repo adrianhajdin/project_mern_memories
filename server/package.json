@@ -15,7 +15,6 @@
     "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.8.11",
-    "multer": "^1.4.2"
+    "mongoose": "^5.9.29"
   }
 }

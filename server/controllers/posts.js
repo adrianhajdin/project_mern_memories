@@ -4,22 +4,6 @@ import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
 const router = express.Router();
-import multer from 'multer';
-
-
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-    cb(null, 'public')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' +file.originalname )
-  }
-})
-
-var upload = multer({ storage: storage }).single('file')
-
-
-
 
 export const getPosts = async (req, res) => { 
     try {
@@ -31,13 +15,20 @@ export const getPosts = async (req, res) => {
     }
 }
 
+export const getPost = async (req, res) => { 
+    const { id } = req.params;
 
-
+    try {
+        const post = await PostMessage.findById(id);
+        
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 
 export const createPost = async (req, res) => {
     const { title, message, selectedFile, creator } = req.body;
-
-    console.log(selectedFile);
 
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator })
 
@@ -51,28 +42,40 @@ export const createPost = async (req, res) => {
 }
 
 export const updatePost = async (req, res) => {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id))
-        return res.status(400).send('No record with given id : ' + req.params.id)
+    const { id } = req.params;
+    const { title, message, creator, selectedFile } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    var updatedRecord = {
-        title: req.body.title,
-        message: req.body.message
-    }
+    const updatedRecord = { creator, title, message, selectedFile };
 
-    PostMessage.findByIdAndUpdate(req.params.id, { $set: updatedRecord },{new:true}, (err, docs) => {
-        if (!err) res.send(docs)
-        else console.log('Error while updating a record : ' + JSON.stringify(err, undefined, 2))
-    })
+    await PostMessage.findByIdAndUpdate(id, updatedRecord);
+
+    res.json(updatedRecord);
 }
 
-export const deletePost = (req, res) => {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id))
-        return res.status(400).send('No record with given id : ' + req.params.id)
+export const deletePost = async (req, res) => {
+    const { id } = req.params;
 
-    PostMessage.findByIdAndRemove(req.params.id, (err, docs) => {
-        if (!err) res.send(docs)
-        else console.log('Error while deleting a record : ' + JSON.stringify(err, undefined, 2))
-    })
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    await PostMessage.findByIdAndRemove(id);
+
+    res.json({ message: "Post deleted successfully." });
+}
+
+export const likePost = async (req, res) => {
+    const { id } = req.params;
+    console.log(1);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const post = await PostMessage.findById(id);
+
+
+    await PostMessage.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 });
+
+    res.json({ message: "Post Liked successfully." });
 }
 
 
