@@ -5,11 +5,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ShareIcon from '@material-ui/icons/Share';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+
+
+import { likePost } from '../../../actions/messages';
 
 import useStyles from './styles';
 
 const Post = ({ record, onDelete, setCurrentId }) => {
-  const classes = useStyles();
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    // const messages = useSelector((state) => state.messages);
+    
 
   console.log(record);
 
@@ -21,7 +28,7 @@ const Post = ({ record, onDelete, setCurrentId }) => {
             <Typography variant="body2">{moment(record.createdAt).fromNow()}</Typography>
         </div>
         <div className={classes.overlay2}>
-            <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(record._id)}><MoreHorizIcon fontSize="medium" /></Button>
+            <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(record._id)}><MoreHorizIcon fontSize="default" /></Button>
         </div>
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">#newyear #countdown #2020</Typography>
@@ -33,7 +40,7 @@ const Post = ({ record, onDelete, setCurrentId }) => {
         </CardContent>
         <CardActions className={classes.cardActions}>
             <div>
-                <Button size="small" color="primary" onClick={() => setCurrentId(record._id)}><ThumbUpAltIcon fontSize="small" /> Like</Button>
+                <Button size="small" color="primary" onClick={() => dispatch(likePost(record._id))}><ThumbUpAltIcon fontSize="small" /> Like {record.likeCount} </Button>
                 <Button size="small" color="primary" onClick={() => setCurrentId(record._id)}><ShareIcon fontSize="small" /> Share</Button>
             </div>
             <Button size="small" color="primary" onClick={() => onDelete(record._id)}><DeleteIcon fontSize="small" /> Delete</Button>

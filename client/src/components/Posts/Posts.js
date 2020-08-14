@@ -32,7 +32,7 @@ const Posts = () => {
             {!messages.length ? 'Loading ' : (
                 <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                     {messages.map((record, index) => (
-                        <Grid item xs={12} sm={6}>
+                        <Grid key={index} item xs={12} sm={6}>
                             <Post record={record} key={index} onDelete={onDelete} setCurrentId={setCurrentId} />
                         </Grid>
                     ))}

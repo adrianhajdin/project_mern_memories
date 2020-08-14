@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ButterToast from "butter-toast";
 import FileBase from 'react-file-base64';
 
@@ -13,9 +13,19 @@ const PostMessageForm = ({ currentId }) => {
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [selectedFile, setSelectedFile] = useState({});
-    
+    const post = useSelector((state) => currentId ? state.messages.find(message => message._id === currentId) : null);
+        
     const dispatch = useDispatch();
     const classes = useStyles();
+
+    useEffect(() => {
+        if(post) {
+            setCreator(post.creator);
+            setTitle(post.title);
+            setMessage(post.message);
+            setSelectedFile(post.selectedFile);
+        }        
+}, [post]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +34,8 @@ const PostMessageForm = ({ currentId }) => {
             dispatch(createPost({ title, message, creator, selectedFile }));
             ButterToast.raise({ content: <Toast action='create' /> })
         } else {
-            dispatch(updatePost(currentId, { title, message }));
+            console.log({ title, message, creator, selectedFile })
+            dispatch(updatePost(currentId, { title, message, creator, selectedFile }));
             ButterToast.raise({ content: <Toast action='update' /> })
         }
     }
