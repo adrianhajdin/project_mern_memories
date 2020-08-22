@@ -5,12 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Form from "../Form/Form";
 import Post from './Post/Post';
 import useStyles from './styles';
-import { getPosts, deletePost } from '../../actions/messages';
+import { getPosts, deletePost } from '../../actions/posts';
 import CustomizedSnackbars from '../Toast/Toast';
 
 const Posts = () => {
     const classes = useStyles();
-    const messages = useSelector((state) => state.messages);
+    const posts = useSelector((state) => state.posts);
     const dispatch = useDispatch();
     const [currentId, setCurrentId] = useState(0)
     const [action, setAction] = useState('')
@@ -30,9 +30,9 @@ const Posts = () => {
                 <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Paper>
             <CustomizedSnackbars action={action} />
-            {!messages.length ? 'Loading ' : (
+            {!posts.length ? 'Loading ' : (
                 <Grid className={classes.container} container alignItems="stretch" spacing={3}>
-                    {messages.map((record, index) => (
+                    {posts.map((record, index) => (
                         <Grid key={index} item xs={12} sm={6}>
                             <Post record={record} key={index} onDelete={onDelete} setCurrentId={setCurrentId} />
                         </Grid>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -7,20 +7,15 @@ import ShareIcon from '@material-ui/icons/Share';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 
-
-import { likePost, getPosts } from '../../../actions/messages';
-
+import { likePost } from '../../../actions/posts';
 import useStyles from './styles';
-
 
 const Post = ({ record, onDelete, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    // const messages = useSelector((state) => state.messages);
-    
+
     const like = (id) => {
         dispatch(likePost(id));
-        // dispatch(getPosts());
     }
 
   return (
@@ -51,4 +46,5 @@ const Post = ({ record, onDelete, setCurrentId }) => {
     </Card>
   );
 }
+
 export default Post;

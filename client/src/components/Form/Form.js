@@ -6,14 +6,14 @@ import FileBase from 'react-file-base64';
 
 import Toast from '../Toast/Toast';
 import useStyles from './styles';
-import { createPost, updatePost, getPosts } from '../../actions/messages';
+import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId }) => {
     const [creator, setCreator] = useState('');
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [selectedFile, setSelectedFile] = useState({});
-    const post = useSelector((state) => currentId ? state.messages.find(message => message._id === currentId) : null);
+    const post = useSelector((state) => currentId ? state.posts.find(message => message._id === currentId) : null);
         
     const dispatch = useDispatch();
     const classes = useStyles();
