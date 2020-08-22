@@ -6,9 +6,9 @@ import FileBase from 'react-file-base64';
 
 import Toast from '../Toast/Toast';
 import useStyles from './styles';
-import { createPost, updatePost } from '../../actions/messages';
+import { createPost, updatePost, getPosts } from '../../actions/messages';
 
-const PostMessageForm = ({ currentId }) => {
+const Form = ({ currentId }) => {
     const [creator, setCreator] = useState('');
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
@@ -34,8 +34,7 @@ const PostMessageForm = ({ currentId }) => {
             dispatch(createPost({ title, message, creator, selectedFile }));
             ButterToast.raise({ content: <Toast action='create' /> })
         } else {
-            console.log({ title, message, creator, selectedFile })
-            dispatch(updatePost(currentId, { title, message, creator, selectedFile }));
+            dispatch(updatePost(currentId, { title, message, creator, selectedFile, _id: currentId }));
             ButterToast.raise({ content: <Toast action='update' /> })
         }
     }
@@ -51,4 +50,4 @@ const PostMessageForm = ({ currentId }) => {
     );
 }
 
-export default PostMessageForm;
+export default Form;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, AppBar, Typography } from "@material-ui/core";
-import ButterToast, { POS_RIGHT, POS_TOP } from "butter-toast";
 
 import Posts from "./components/Posts/Posts";
 
@@ -10,7 +9,6 @@ const App = () => (
             <Typography variant="h2" align="center">Memories</Typography>
         </AppBar>
         <Posts />
-        <ButterToast position={{vertical: POS_TOP ,horizontal: POS_RIGHT }}/>
     </Container>
 );
 

@@ -9,29 +9,25 @@ export const getPosts = () => dispatch => {
 }
 
 export const createPost = (data) => dispatch => {
-    console.log(data);
     api.createPost(data)
-        .then(res =>{
-            dispatch({ type: CREATE, payload: res.data })
-        })
+        .then(res => dispatch({ type: CREATE, payload: res.data }))
         .catch(err => console.log(err))
 }
 
 export const updatePost = (id, data) => dispatch => {
-    console.log(1, data);
     api.updatePost(id, data)
     .then(res => {
-        console.log(2, res.data)
             dispatch({ type: UPDATE, payload: res.data })
         })
         .catch(err => console.log(err))
 }
 
 export const likePost = (id) => dispatch => {
-    console.log(id);
     api.likePost(id)
         .then((res) => dispatch({ type: LIKE_POST, payload: res.data }))
         .catch(err => console.log(err))
+
+        // getPosts();
 }
 
 export const deletePost = (id, ) => dispatch => {

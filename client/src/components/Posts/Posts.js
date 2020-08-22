@@ -6,7 +6,8 @@ import Form from "../Form/Form";
 import Post from './Post/Post';
 import useStyles from './styles';
 import { getPosts, deletePost } from '../../actions/messages';
-import CustomizedSnackbars from '../Toast/Toast'
+import CustomizedSnackbars from '../Toast/Toast';
+
 const Posts = () => {
     const classes = useStyles();
     const messages = useSelector((state) => state.messages);
@@ -16,7 +17,7 @@ const Posts = () => {
   
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentId, dispatch]);
 
     const onDelete = id => {
         dispatch(deletePost(id));

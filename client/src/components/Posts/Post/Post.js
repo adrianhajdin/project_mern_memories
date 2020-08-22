@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,17 +8,20 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 
 
-import { likePost } from '../../../actions/messages';
+import { likePost, getPosts } from '../../../actions/messages';
 
 import useStyles from './styles';
+
 
 const Post = ({ record, onDelete, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     // const messages = useSelector((state) => state.messages);
     
-
-  console.log(record);
+    const like = (id) => {
+        dispatch(likePost(id));
+        // dispatch(getPosts());
+    }
 
   return (
     <Card className={classes.card}>
@@ -40,7 +43,7 @@ const Post = ({ record, onDelete, setCurrentId }) => {
         </CardContent>
         <CardActions className={classes.cardActions}>
             <div>
-                <Button size="small" color="primary" onClick={() => dispatch(likePost(record._id))}><ThumbUpAltIcon fontSize="small" /> Like {record.likeCount} </Button>
+                <Button size="small" color="primary" onClick={() => like(record._id)}><ThumbUpAltIcon fontSize="small" /> Like {record.likeCount} </Button>
                 <Button size="small" color="primary" onClick={() => setCurrentId(record._id)}><ShareIcon fontSize="small" /> Share</Button>
             </div>
             <Button size="small" color="primary" onClick={() => onDelete(record._id)}><DeleteIcon fontSize="small" /> Delete</Button>
