@@ -12,7 +12,8 @@ export default makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'center'
     },
-    postBtn: {
-        width: "50%"
+    fileInput: {
+        width: '97%',
+        margin: '8px 0',
     }
 }));

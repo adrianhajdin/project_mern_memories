@@ -29,7 +29,7 @@ const Post = ({ record, onDelete, setCurrentId }) => {
             <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(record._id)}><MoreHorizIcon fontSize="default" /></Button>
         </div>
         <div className={classes.details}>
-          <Typography variant="body2" color="textSecondary" component="h2">#newyear #countdown #2020</Typography>
+          <Typography variant="body2" color="textSecondary" component="h2">{record.tags.map((tag) => `#${tag} `)}</Typography>
           <Typography variant="body2" color="textSecondary" component="h2">test</Typography>
         </div>
         <Typography className={classes.title} gutterBottom variant="h5" component="h2">{record.title}</Typography>

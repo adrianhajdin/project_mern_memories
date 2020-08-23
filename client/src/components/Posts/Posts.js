@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, CircularProgress } from "@material-ui/core";
 import { useSelector, useDispatch } from 'react-redux';
 
 import Form from "../Form/Form";
@@ -30,7 +30,7 @@ const Posts = () => {
                 <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Paper>
             <CustomizedSnackbars action={action} />
-            {!posts.length ? 'Loading ' : (
+            {!posts.length ?<CircularProgress /> : (
                 <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                     {posts.map((record, index) => (
                         <Grid key={index} item xs={12} sm={6}>
