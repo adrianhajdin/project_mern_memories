@@ -24,6 +24,7 @@ const Form = ({ currentId }) => {
             setTitle(post.title);
             setMessage(post.message);
             setSelectedFile(post.selectedFile);
+            setTags(post.tags);
         }        
     }, [post]);
 

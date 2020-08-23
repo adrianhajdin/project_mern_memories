@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Paper, CircularProgress } from "@material-ui/core";
+import { Grid, Paper, CircularProgress, Container } from "@material-ui/core";
 import { useSelector, useDispatch } from 'react-redux';
 
 import Form from "../Form/Form";
@@ -25,21 +25,29 @@ const Posts = () => {
     }
 
     return (
-        <div className={classes.mainContainer}>
-            <Paper className={classes.paper}>
-                <Form currentId={currentId} setCurrentId={setCurrentId} />
-            </Paper>
+        <Container className={classes.mainContainer}>
             <CustomizedSnackbars action={action} />
+            <Grid style={{justifyContent: 'space-between'}} container>
+        <Grid item xs={7}>
+
             {!posts.length ?<CircularProgress /> : (
                 <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                     {posts.map((record, index) => (
-                        <Grid key={index} item xs={12} sm={6}>
+                        <Grid key={index} item xs={12} sm={6} md={6}>
                             <Post record={record} key={index} onDelete={onDelete} setCurrentId={setCurrentId} />
                         </Grid>
                     ))}
                 </Grid>
             )}
-        </div>
+            </Grid>
+        <Grid  item xs={4}>
+            <Paper className={classes.paper}>
+                <Form currentId={currentId} setCurrentId={setCurrentId} />
+            </Paper>
+            
+        </Grid>
+            </Grid>
+        </Container>
     );
 }
 
