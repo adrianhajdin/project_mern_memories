@@ -38,10 +38,11 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, history) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
+    history.push(`/posts/${data._id}`);
 
     dispatch({ type: CREATE, payload: data });
     dispatch({ type: END_LOADING });
@@ -52,11 +53,9 @@ export const createPost = (post) => async (dispatch) => {
 
 export const updatePost = (id, post) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
     const { data } = await api.updatePost(id, post);
 
     dispatch({ type: UPDATE, payload: data });
-    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }
@@ -76,11 +75,9 @@ export const likePost = (id) => async (dispatch) => {
 
 export const deletePost = (id) => async (dispatch) => {
   try {
-    dispatch({ type: START_LOADING });
     await await api.deletePost(id);
 
     dispatch({ type: DELETE, payload: id });
-    dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);
   }
