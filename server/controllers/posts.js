@@ -7,7 +7,7 @@ const router = express.Router();
 
 export const getPosts = async (req, res) => {
     const { page } = req.query;
-    console.log('here')
+    
     try {
         const LIMIT = 8;
         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
@@ -22,12 +22,12 @@ export const getPosts = async (req, res) => {
 }
 
 export const getPostsBySearch = async (req, res) => {
-    const { searchQuery } = req.query;
-console.log(searchQuery);
+    const { searchQuery, tags } = req.query;
+
     try {
         const title = new RegExp(searchQuery, "i");
-    
-        const posts = await PostMessage.find({ title });
+
+        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
 
         res.json({ data: posts });
     } catch (error) {    

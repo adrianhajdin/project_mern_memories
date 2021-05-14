@@ -1,57 +1,79 @@
 import React, { useEffect } from 'react';
-import { Paper, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
+import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { getPost, likePost, deletePost } from '../../actions/posts';
+import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 const Post = () => {
-  const { post } = useSelector((state) => state.posts);
-  const { id } = useParams();
+  const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getPost(id));
   }, [id]);
 
+  useEffect(() => {
+    if (post) {
+      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+    }
+  }, [post]);
+
   if (!post) return null;
 
+  const openPost = (_id) => history.push(`/posts/${_id}`);
+
+  if (isLoading) {
+    return (
+      <Paper style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', height: '39vh' }}>
+        <CircularProgress size="7em" />
+      </Paper>
+    );
+  }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+
   return (
-    <Paper style={{ padding: '10px' }}>
+    <Paper style={{ padding: '20px', borderRadius: '15px' }}>
       <div className={classes.card}>
         <div className={classes.section}>
-          <Typography variant="h6">CREATOR PROFILE - coming soon!</Typography>
-          <Typography variant="h6">{post.name}</Typography>
-          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+          <Typography variant="h3" component="h2">{post.title}</Typography>
+          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+          <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
+          <Typography variant="h6">Created by: {post.name}</Typography>
+          <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
+          <Divider style={{ margin: '20px 0' }} />
+          <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
+          <Divider style={{ margin: '20px 0' }} />
+          <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+          <Divider style={{ margin: '20px 0' }} />
         </div>
-        <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+        <div className={classes.imageSection}>
+          <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+        </div>
+      </div>
+      {!!recommendedPosts.length && (
         <div className={classes.section}>
-          <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
-          <Typography gutterBottom variant="h5" component="h2">{post.title}</Typography>
-          <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
-          {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-          <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
-            <DeleteIcon fontSize="small" /> Delete
-          </Button>
-          )}
+          <Typography gutterBottom variant="h5">You might also like:</Typography>
+          <Divider />
+          <div style={{ display: 'flex' }}>
+            {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
+              <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
+                <Typography gutterBottom variant="h6">{title}</Typography>
+                <Typography gutterBottom variant="subtitle2">{name}</Typography>
+                <Typography gutterBottom variant="subtitle2">{message}</Typography>
+                <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
+                <img src={selectedFile} width="200px" />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className={classes.section}>
-        <Typography variant="h6">COMMENTS - coming soon!</Typography>
-      </div>
-      <div className={classes.section}>
-        <Typography variant="h6">RELATED POSTS - coming soon!</Typography>
-      </div>
-      <div className={classes.section}>
-        <Typography variant="h6">REALTIME CHAT - coming soon!</Typography>
-      </div>
+      )}
     </Paper>
   );
 };

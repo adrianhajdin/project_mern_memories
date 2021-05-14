@@ -19,7 +19,7 @@ const Post = ({ post, setCurrentId }) => {
   const history = useHistory();
 
   const Likes = () => {
-    if (post.likes.length > 0) {
+    if (post?.likes?.length > 0) {
       return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
         ? (
           <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
@@ -32,15 +32,15 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const openPost = (e) => {
-    dispatch(getPost(post._id));
+    // dispatch(getPost(post._id, history));
 
     history.push(`/posts/${post._id}`);
   };
 
   return (
     <Card className={classes.card}>
-
       <ButtonBase
+        component="span"
         name="test"
         className={classes.cardAction}
         onClick={openPost}
