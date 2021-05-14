@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Grow, Grid, AppBar, TextField, Button, Paper, Chip } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
 import Pagination from '../Pagination';
@@ -18,7 +18,6 @@ const Home = () => {
   const query = useQuery();
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
-  const searchTags = query.get('tags');
 
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
@@ -26,12 +25,6 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
   const history = useHistory();
-
-  // useEffect(() => {
-  //   if (query.get('page')) {
-  //     dispatch(getPosts(page));
-  //   }
-  // }, [currentId, dispatch, page]);
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -42,25 +35,15 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (searchQuery || searchTags) {
-  //     dispatch(getPostsBySearch({ search: searchQuery, tags: searchTags }));
-  //   }
-  // }, [searchQuery, searchTags]);
-
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();
     }
   };
 
-  const handleAddChip = (tag) => {
-    setTags([...tags, tag]);
-  };
+  const handleAddChip = (tag) => setTags([...tags, tag]);
 
-  const handleDeleteChip = (chipToDelete) => {
-    setTags(tags.filter((tag) => tag !== chipToDelete));
-  };
+  const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (
     <Grow in>
@@ -84,7 +67,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             {(!searchQuery && !tags.length) && (
-              <Paper className={classes.pagination}>
+              <Paper className={classes.pagination} elevation={6}>
                 <Pagination page={page} />
               </Paper>
             )}
