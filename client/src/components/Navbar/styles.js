@@ -11,7 +11,6 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     padding: '10px 50px',
     [theme.breakpoints.down('sm')]: {
-      flexWrap: 'wrap',
       flexDirection: 'column',
     },
   },
