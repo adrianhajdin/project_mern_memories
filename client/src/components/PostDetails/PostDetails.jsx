@@ -30,7 +30,7 @@ const Post = () => {
 
   if (isLoading) {
     return (
-      <Paper elevation={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', height: '39vh' }}>
+      <Paper elevation={6} className={classes.loadingPaper}>
         <CircularProgress size="7em" />
       </Paper>
     );
