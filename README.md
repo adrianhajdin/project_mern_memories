@@ -1,4 +1,7 @@
-Nodejs is asynchronous
+Nodejs
+
+    Node. js (Node) is an open source development platform for executing JavaScript code server-side. 
+      
 
 # Memories
 
