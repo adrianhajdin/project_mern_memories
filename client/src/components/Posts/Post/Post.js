@@ -18,19 +18,22 @@ const Post = ({ post, setCurrentId }) => {
   const history = useHistory();
   const classes = useStyles();
 
+  const userId = user?.result.googleId || user?.result?._id;
+  const hasLikedPost = post.likes.find((like) => like === userId);
+
   const handleLike = async () => {
     dispatch(likePost(post._id));
 
-    if (post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))) {
-      setLikes(post.likes.filter((id) => id !== (user?.result?.googleId || user?.result?._id)));
+    if (hasLikedPost) {
+      setLikes(post.likes.filter((id) => id !== userId));
     } else {
-      setLikes([...post.likes, user?.result?.googleId || user?.result?._id]);
+      setLikes([...post.likes, userId]);
     }
   };
 
   const Likes = () => {
     if (likes.length > 0) {
-      return likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+      return likes.find((like) => like === userId)
         ? (
           <><ThumbUpAltIcon fontSize="small" />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}` }</>
         ) : (
