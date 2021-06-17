@@ -35,6 +35,18 @@ export const getPostsBySearch = async (req, res) => {
     }
 }
 
+export const getPostsByCreator = async (req, res) => {
+    const { name } = req.query;
+
+    try {
+        const posts = await PostMessage.find({ name });
+
+        res.json({ data: posts });
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const getPost = async (req, res) => { 
     const { id } = req.params;
 
