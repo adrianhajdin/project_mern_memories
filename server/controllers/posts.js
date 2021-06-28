@@ -49,10 +49,7 @@ export const getPost = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const post = req.body;
-    
-    const myDebugStr = "title="+post.title+", file="+post.file.substring(0,15)+", name="+post.name;
-    console.log("post before creatingPost: " + myDebugStr);
-    
+
     const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
@@ -68,9 +65,6 @@ export const updatePost = async (req, res) => {
     const { id } = req.params;
     const { title, message, creator, selectedFile, tags } = req.body;
     
-    const myDebugStr = "title="+title+", file="+selectedFile.substring(0,20)+", id="+id;
-    console.log("post before creatingPost: " + myDebugStr);
-
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
     const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
