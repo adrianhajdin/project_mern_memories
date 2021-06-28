@@ -26,7 +26,7 @@ const Form = ({ currentId, setCurrentId }) => {
     if (post) setPostData(post);
   }, [post]);
 
-  // this effect validates that whenever our post.selectedFile field changes, we make sure it's a file.
+  // this effect validates that whenever our post.selectedFile field changes, we make sure it's a valid image file.
   useEffect(() => {
     // does the selected file have any values?
     if(postData.selectedFile.length>0) {
