@@ -26,6 +26,24 @@ const Form = ({ currentId, setCurrentId }) => {
     if (post) setPostData(post);
   }, [post]);
 
+  // this effect validates that whenever our post.selectedFile field changes, we make sure it's a file.
+  useEffect(() => {
+    // does the selected file have any values?
+    if(postData.selectedFile.length>0) {
+        // is the file type an image?
+        if(postData.selectedFile.substring(0, 11) === 'data:image/') {
+            console.log("GOOD - selectedFile=" + postData.selectedFile.substring(0, 35) + " ...");
+        } else {
+            alert('File type not allowed. Make sure to choose an image for your memory.');
+            console.log("BAD - selectedFile NOT AN IMAGE: " + postData.selectedFile.substring(0, 35) + " ...");
+            setPostData({ ...postData, selectedFile: ''})
+        }
+    } else {
+        // if the selected file has no value
+        console.log("post.selectedFile is blank or was set blank: " + JSON.stringify(postData));
+    }
+  }, [postData.selectedFile] /* trigger only when the selected file changes*/);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
