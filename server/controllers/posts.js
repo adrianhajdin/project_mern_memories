@@ -47,7 +47,6 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
   const { id } = req.params;
-  console.log(req);
   const { title, message, creator, selectedFile, tags } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
