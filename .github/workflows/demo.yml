@@ -30,4 +30,4 @@ jobs:
             github_token: ${{ secrets.G_ACCESS_TOKEN }}
             workflow_file_name: root.yml
             ref: main
-            trigger_workflow: Node
+            trigger_workflow: true
