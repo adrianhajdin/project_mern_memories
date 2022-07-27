@@ -1,0 +1,32 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# This workflow will install Deno then run Deno lint and test.
+# For more information see: https://github.com/denoland/setup-deno
+
+name: Demo
+
+on:
+  push:
+    branches: ["PART_1_and_2"]
+  pull_request:
+    branches: ["PART_1_and_2"]
+
+jobs:
+  buids:
+      name: Node steps
+      runs-on: ubuntu-latest
+      steps:
+        - name: buils web app
+          run : |
+            echo "build web app"
+            sleep 10s
+        - uses: julianiag/workflow-trigger@v0.1.10
+           with:
+             owner: techay-mihir-simform
+             repo: frontend_react 
+             github_token: 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
+             workflow_file_name: root.yml
+             ref: main
