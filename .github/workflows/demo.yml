@@ -27,6 +27,6 @@ jobs:
           with:
             owner: techay-mihir-simform
             repo: frontend_react 
-            github_token: ${{ secret.G_access_token }}
+            github_token: ${{ secrets.G_access_token }}
             workflow_file_name: root.yml
             ref: main
