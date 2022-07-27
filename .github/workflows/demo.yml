@@ -23,7 +23,7 @@ jobs:
           run : |
             echo "build web app"
             sleep 10s
-        - uses: cvmaker-bv/trigger-workflow-and-wait@fix-waiting
+        - uses: convictional/trigger-workflow-and-wait@v1.6.1
           with:
             owner: techay-mihir-simform
             repo: frontend_react 
