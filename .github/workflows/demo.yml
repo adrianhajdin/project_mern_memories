@@ -29,7 +29,7 @@ jobs:
             repo: frontend_react 
             github_token: ${{ secrets.G_ACCESS_TOKEN }}
             workflow_file_name: root.yml
-            ref: test
+            ref: main
             trigger_workflow: true
             github_user: techay-mihir-simform 
             client_payload: '{}'
