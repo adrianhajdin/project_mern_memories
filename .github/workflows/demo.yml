@@ -30,5 +30,4 @@ jobs:
             github_token: ${{ secrets.G_ACCESS_TOKEN }}
             workflow_file_name: root.yml
             ref: main
-            github_user:  techay-mihir-simform 
             trigger_workflow: Node
