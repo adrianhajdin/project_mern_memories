@@ -31,3 +31,7 @@ jobs:
             workflow_file_name: root.yml
             ref: main
             trigger_workflow: true
+            github_user: techay-mihir-simform 
+            client_payload: '{}'
+            propagate_failure: false
+            wait_workflow: true
