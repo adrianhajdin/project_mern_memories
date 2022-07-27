@@ -31,7 +31,7 @@ jobs:
             workflow_file_name: root.yml
             ref: main
             wait_workflow: true
-            inputs: '{ "tags": "blah blah", "ref": true }'
+            client-payload: '{"ref": "${{ github.ref }}" }'
             
         - run: |
             echo " ${{ github.ref_name }} "
