@@ -19,27 +19,27 @@ jobs:
       name: Node steps
       runs-on: ubuntu-latest
       steps:
-#         - name: buils web app
-#           run : |
-#             echo "build web app"
-#             sleep 10s
-#         - uses: convictional/trigger-workflow-and-wait@v1.6.1
-#           with:
-#             owner: techay-mihir-simform
-#             repo: frontend_react 
-#             github_token: ${{ secrets.G_ACCESS_TOKEN }}
-#             workflow_file_name: root.yml
-#             ref: main
-#             wait_workflow: true
-#             args: '{"ref": "${{ github.ref }}" }'
-        - name: Repository Dispatch
-          #uses: peter-evans/repository-dispatch@v2
-          uses: convictional/trigger-workflow-and-wait@v1.6.1
+        - name: buils web app
+          run : |
+            echo "build web app"
+            sleep 10s
+        - uses: convictional/trigger-workflow-and-wait@v1.6.1
           with:
-            token: ${{ secrets.G_ACCESS_TOKEN }}
-            repository: techay-mihir-simform/frontend_react 
-            event-type: my-event
-            client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}' 
+            owner: techay-mihir-simform
+            repo: frontend_react 
+            github_token: ${{ secrets.G_ACCESS_TOKEN }}
+            workflow_file_name: root.yml
+            ref: main
+            wait_workflow: true
+            client_payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}' 
+#         - name: Repository Dispatch
+#           #uses: peter-evans/repository-dispatch@v2
+#           uses: convictional/trigger-workflow-and-wait@v1.6.1
+#           with:
+#             token: ${{ secrets.G_ACCESS_TOKEN }}
+#             repository: techay-mihir-simform/frontend_react 
+#             event-type: my-event
+#             client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}' 
         - name: buils web app 
           run: |
              sleep 100
