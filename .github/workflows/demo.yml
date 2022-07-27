@@ -33,7 +33,8 @@ jobs:
 #             wait_workflow: true
 #             args: '{"ref": "${{ github.ref }}" }'
         - name: Repository Dispatch
-          uses: peter-evans/repository-dispatch@v2
+          #uses: peter-evans/repository-dispatch@v2
+          uses: convictional/trigger-workflow-and-wait@v1.6.1
           with:
             token: ${{ secrets.G_ACCESS_TOKEN }}
             repository: techay-mihir-simform/frontend_react 
