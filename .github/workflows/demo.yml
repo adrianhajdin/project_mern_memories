@@ -23,15 +23,21 @@ jobs:
 #           run : |
 #             echo "build web app"
 #             sleep 10s
-        - uses: convictional/trigger-workflow-and-wait@v1.6.1
+#         - uses: convictional/trigger-workflow-and-wait@v1.6.1
+#           with:
+#             owner: techay-mihir-simform
+#             repo: frontend_react 
+#             github_token: ${{ secrets.G_ACCESS_TOKEN }}
+#             workflow_file_name: root.yml
+#             ref: main
+#             wait_workflow: true
+#             args: '{"ref": "${{ github.ref }}" }'
+        - name: Repository Dispatch
+          uses: peter-evans/repository-dispatch@v2
           with:
-            owner: techay-mihir-simform
-            repo: frontend_react 
-            github_token: ${{ secrets.G_ACCESS_TOKEN }}
-            workflow_file_name: root.yml
-            ref: main
-            wait_workflow: true
-            args: '{"ref": "${{ github.ref }}" }'
-            
+            token: ${{ secrets.REPO_ACCESS_TOKEN }}
+            repository: username/my-repo
+            event-type: my-event
+            client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'            
         - run: |
             echo " ${{ github.ref_name }} "
