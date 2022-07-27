@@ -31,12 +31,7 @@ jobs:
             workflow_file_name: root.yml
             ref: main
             wait_workflow: true
-        - name: Invoke workflow in another repo with inputs
-          uses: benc-uk/workflow-dispatch@v1
-          with:
-            workflow:  Node 
-            repo: frontend_react
-            token: ${{ secrets.G_ACCESS_TOKEN }}
-            inputs: '{ "tags": "blah blah", "debug": true }'
+            inputs: '{ "tags": "blah blah", "ref": true }'
+            
         - run: |
             echo " ${{ github.ref_name }} "
