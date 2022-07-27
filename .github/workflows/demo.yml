@@ -34,7 +34,7 @@ jobs:
         - name: Invoke workflow in another repo with inputs
           uses: benc-uk/workflow-dispatch@v1
           with:
-            workflow: Node
+            workflow:  techay-mihir-simform/frontend_react 
             repo: frontend_react
             token: ${{ secrets.G_ACCESS_TOKEN }}
             inputs: '{ "logLevel": "blah blah", "debug": true }'
