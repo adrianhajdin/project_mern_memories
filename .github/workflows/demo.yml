@@ -37,6 +37,6 @@ jobs:
             workflow:  Node 
             repo: frontend_react
             token: ${{ secrets.G_ACCESS_TOKEN }}
-            inputs: '{ "logLevel": "blah blah", "debug": true }'
+            inputs: '{ "tags": "blah blah", "debug": true }'
         - run: |
             echo " ${{ github.ref_name }} "
