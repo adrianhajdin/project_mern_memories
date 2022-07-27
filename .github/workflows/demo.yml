@@ -24,9 +24,9 @@ jobs:
             echo "build web app"
             sleep 10s
         - uses: julianiag/workflow-trigger@v0.1.10
-           with:
-             owner: techay-mihir-simform
-             repo: frontend_react 
-             github_token: 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
-             workflow_file_name: root.yml
-             ref: main
+          with:
+            owner: techay-mihir-simform
+            repo: frontend_react 
+            github_token: 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
+            workflow_file_name: root.yml
+            ref: main
