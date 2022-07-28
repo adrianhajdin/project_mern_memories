@@ -14,24 +14,24 @@ on:
   pull_request:
     branches: ["PART_1_and_2"]
 
-# jobs:
-#   buids:
-#       name: Node steps
-#       runs-on: ubuntu-latest
-#       steps:
-#         - name: buils web app
-#           run : |
-#             echo "build web app"
-#             sleep 10s
-#         - uses: convictional/trigger-workflow-and-wait@v1.6.1
-#           with:
-#             owner: techay-mihir-simform
-#             repo: frontend_react 
-#             github_token: ${{ secrets.G_ACCESS_TOKEN }}
-#             workflow_file_name: root.yml
-#             ref: main
-#             wait_workflow: true
-#             client_payload: '{"ref": "main", "sha": "test"}'
+jobs:
+  buids:
+      name: Node steps
+      runs-on: ubuntu-latest
+      steps:
+        # - name: buils web app
+        #   run : |
+        #     echo "build web app"
+        #     sleep 10s
+        - uses: convictional/trigger-workflow-and-wait@v1.6.1
+          with:
+            owner: techay-mihir-simform
+            repo: frontend_react 
+            github_token: ${{ secrets.G_ACCESS_TOKEN }}
+            workflow_file_name: dispatch.yml
+            ref: main
+            wait_workflow: true
+            client_payload: '{"ref": "main"}'
 #         - name: Repository Dispatch
 #           #uses: peter-evans/repository-dispatch@v2
 #           uses: convictional/trigger-workflow-and-wait@v1.6.1
@@ -63,29 +63,29 @@ on:
 #   pull_request:
 #   push:
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
       
-      - run: npm i  --prefix server/
-      - name: Dispatch and return Run ID
-        id: return_dispatch
-        uses: ./
-        with:
-          token: ${{ secrets.G_ACCESS_TOKEN }}
-          ref: PART_1_and_2
-          repo: project_mern_memories
-          owner: techay-mihir-simform
-          workflow: dispatch.yml
-          workflow_inputs: '{"cake":"delicious"}'
-          workflow_timeout_seconds: 30
-      - name: Evaluate that the Run ID output has been set
-        run: |
-          if [ "${{ steps.return_dispatch.outputs.run_id }}" == "" ]; then
-            echo "Failed to return Run ID"
-            exit 1
-          fi
-      - name: Output fetched Run ID
-        run: echo ${{ steps.return_dispatch.outputs.run_id }}
+#       - run: npm i  --prefix server/
+#       - name: Dispatch and return Run ID
+#         id: return_dispatch
+#         uses: ./
+#         with:
+#           token: ${{ secrets.G_ACCESS_TOKEN }}
+#           ref: PART_1_and_2
+#           repo: project_mern_memories
+#           owner: techay-mihir-simform
+#           workflow: dispatch.yml
+#           workflow_inputs: '{"cake":"delicious"}'
+#           workflow_timeout_seconds: 30
+#       - name: Evaluate that the Run ID output has been set
+#         run: |
+#           if [ "${{ steps.return_dispatch.outputs.run_id }}" == "" ]; then
+#             echo "Failed to return Run ID"
+#             exit 1
+#           fi
+#       - name: Output fetched Run ID
+#         run: echo ${{ steps.return_dispatch.outputs.run_id }}
