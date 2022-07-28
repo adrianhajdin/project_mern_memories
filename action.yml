@@ -30,6 +30,6 @@ inputs:
     description: Time until giving up waiting for the start of the workflow run.
     default: 300
 
-runs:
-  using: node16
-  main: /home/runner/work/project_mern_memories/project_mern_memories/client/src/app.js
+# runs:
+#   using: node16
+#   main: /home/runner/work/project_mern_memories/project_mern_memories/client/src/app.js
