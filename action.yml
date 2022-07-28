@@ -32,4 +32,4 @@ inputs:
 
 runs:
   using: node16
-  main: ./app.js
+  main: /app.js
