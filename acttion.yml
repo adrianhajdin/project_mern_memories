@@ -1,0 +1,35 @@
+
+name: Return Dispatch
+description: Dispatch an action and return the new run ID.
+author: Alex Miller
+branding:
+  icon: refresh-cw
+  color: green
+outputs:
+  run_id:
+    description: The identified Run ID.
+inputs:
+  token:
+    description: GitHub Personal Access Token for making API requests.
+    required: true
+  ref:
+    description: The git reference for the workflow. The reference can be a branch or tag name.
+    required: true
+  repo:
+    description: Repository of the action to dispatch.
+    required: true
+  owner:
+    description: Owner of the given repository.
+    required: true
+  workflow:
+    description: Workflow to return an ID for. Can be the ID or the workflow filename.
+    required: true
+  workflow_inputs:
+    description: A flat JSON object, only supports strings (as per workflow inputs API).
+  workflow_timeout_seconds:
+    description: Time until giving up waiting for the start of the workflow run.
+    default: 300
+
+runs:
+  using: node16
+  main: dist/index.js
