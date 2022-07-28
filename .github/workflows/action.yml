@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Dispatch and return Run ID
         id: return_dispatch
-        uses: ./
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
           token: ${{ secrets.G_ACCESS_TOKEN }}
           ref: main
