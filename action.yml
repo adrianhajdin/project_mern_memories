@@ -32,4 +32,4 @@ inputs:
 
 runs:
   using: node16
-  main: /client/src/app.js
+  main: /home/runner/work/project_mern_memories/project_mern_memories/client/src/app.js
