@@ -32,4 +32,4 @@ inputs:
 
 runs:
   using: node16
-  main: ./home/runner/work/project_mern_memories/project_mern_memories/package-lock.json
+  main: /home/runner/work/project_mern_memories/project_mern_memories/package-lock.json
