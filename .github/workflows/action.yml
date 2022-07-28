@@ -75,8 +75,8 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.G_ACCESS_TOKEN }}
-          ref: main
-          repo: frontend_react
+          ref: PART_1_and_2
+          repo: project_mern_memories
           owner: techay-mihir-simform
           workflow: dispatch.yml
           workflow_inputs: '{"cake":"delicious"}'
