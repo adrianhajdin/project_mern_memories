@@ -32,6 +32,8 @@ jobs:
             ref: main
             wait_workflow: true
             client_payload: '{"ref": "testtst"}'
+        - run: sleep 100
+        - run: echo "working and tested"
 #         - name: Repository Dispatch
 #           #uses: peter-evans/repository-dispatch@v2
 #           uses: convictional/trigger-workflow-and-wait@v1.6.1
