@@ -76,7 +76,7 @@ jobs:
           ref: main
           repo: frontend_react
           owner: techay-mihir-simform
-          workflow: root.yml
+          workflow: dispatch.yml
           workflow_inputs: '{"cake":"delicious"}'
           workflow_timeout_seconds: 30
       - name: Evaluate that the Run ID output has been set
