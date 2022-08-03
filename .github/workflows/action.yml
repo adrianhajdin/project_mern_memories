@@ -19,6 +19,8 @@ jobs:
       name: Node steps
       runs-on: ubuntu-latest
       steps:
+        - run: echo ${{ github.ref_name }}
+        - run: echo ${{ github.head_ref }}
         # - name: buils web app
         #   run : |
         #     echo "build web app"
