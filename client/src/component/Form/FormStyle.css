@@ -1,0 +1,8 @@
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+form > label{
+  font-weight: 800;
+}
