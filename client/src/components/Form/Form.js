@@ -14,7 +14,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   useEffect(() => {
     if (post) setPostData(post);
-  }, [post]);
+  }, [post]); 
 
   const clear = () => {
     setCurrentId(0);
