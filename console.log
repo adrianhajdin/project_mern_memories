@@ -24,6 +24,8 @@ console.log('Hello ' + name);
 // passing object
 let obj = {
     name: 'Gaurav',
+    surname 'Kumar'
     age: 21
+    
 }
 console.log(obj);
