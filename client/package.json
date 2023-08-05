@@ -17,7 +17,9 @@
     "react-redux": "^7.1.3",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "three": "^0.121.0",
+    "vanta": "^0.5.24"
   },
   "scripts": {
     "start": "react-scripts start",
