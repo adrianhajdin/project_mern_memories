@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "bcryptjs": "^2.4.3",
+=======
+    "@reduxjs/toolkit": "^2.0.1",
+>>>>>>> c24440ec3a5d33d19fc66ece6bbf4062ddc17212
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
