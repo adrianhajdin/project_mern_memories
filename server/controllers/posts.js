@@ -29,6 +29,12 @@ export const getPost = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const { title, message, selectedFile, creator, tags } = req.body;
+    
+    const match = await PostMessage({ title, message });
+    
+    if(match){
+        return res.status(409).json("duplicate post");
+    }
 
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
 
