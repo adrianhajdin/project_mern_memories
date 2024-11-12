@@ -20,10 +20,13 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-legacy": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build-legacy": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "test-legacy": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
