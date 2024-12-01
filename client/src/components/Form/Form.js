@@ -14,16 +14,19 @@ const Form = ({ currentId, setCurrentId }) => {
 
   useEffect(() => {
     if (post) setPostData(post);
+
+    
   }, [post]);
 
   const clear = () => {
     setCurrentId(0);
     setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
-  };
 
+  };
+const [namestate, setNamestate] = useState(0);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setNamestate(1);
     if (currentId === 0) {
       dispatch(createPost(postData));
       clear();
@@ -31,6 +34,8 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(updatePost(currentId, postData));
       clear();
     }
+    
+   
   };
 
   return (
@@ -41,7 +46,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
         <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
         <TextField name="tags" variant="outlined" label="Tags (coma separated)" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
-        <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
+        <div ref={()=>{setNamestate(0)}} className={classes.fileInput}><FileBase type="file" id="fileupload" key={namestate}  multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} /></div>
         <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
         <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
       </form>
