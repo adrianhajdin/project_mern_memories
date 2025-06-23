@@ -14,6 +14,10 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    comments: { 
+        type: [String], 
+        default: [] 
+    },
 })
 
 var PostMessage = mongoose.model('PostMessage', postSchema);
