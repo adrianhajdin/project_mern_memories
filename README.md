@@ -13,4 +13,8 @@ By the end of this video, you will have a strong understanding of how the MERN S
 ### [🚀 Land your dream programming job in 6 months](https://jsmastery.pro/masterclass)
 
 Setup:
-- run ```npm i && npm start``` for both client and server side to start the app
+1) Create one file .env , and in that file put your dataBase url like MONGO_URI=<Your_Link>
+
+2) Run this commands on your terminal for backend : <cd server and npm install> after that run your backend using <nodemon index.js>
+
+3) Run this commands on your terminal for frontend : <cd client and npm install> after that run your frontend using <npm start>
