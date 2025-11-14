@@ -13,26 +13,71 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  // -------- Safe fallback image ---------
+  const imageUrl =
+    post?.selectedFile ||
+    'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png';
+
+  // -------- Safe tags handling ---------
+  const formattedTags = Array.isArray(post?.tags)
+    ? post.tags.map((tag) => `#${tag}`).join(' ')
+    : '';
+
   return (
     <Card className={classes.card}>
-      <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
+      <CardMedia
+        className={classes.media}
+        image={imageUrl}
+        title={post?.title || 'Post Image'}
+      />
+
       <div className={classes.overlay}>
-        <Typography variant="h6">{post.creator}</Typography>
-        <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        <Typography variant="h6">{post?.creator || 'Unknown'}</Typography>
+        <Typography variant="body2">{moment(post?.createdAt).fromNow()}</Typography>
       </div>
+
       <div className={classes.overlay2}>
-        <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
+        <Button
+          style={{ color: 'white' }}
+          size="small"
+          onClick={() => setCurrentId(post._id)}
+        >
+          <MoreHorizIcon fontSize="default" />
+        </Button>
       </div>
+
       <div className={classes.details}>
-        <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {formattedTags}
+        </Typography>
       </div>
-      <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
+
+      <Typography className={classes.title} gutterBottom variant="h5" component="h2">
+        {post?.title || 'No Title'}
+      </Typography>
+
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {post?.message || 'No message available.'}
+        </Typography>
       </CardContent>
+
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}><ThumbUpAltIcon fontSize="small" /> Like {post.likeCount} </Button>
-        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(likePost(post._id))}
+        >
+          <ThumbUpAltIcon fontSize="small" /> Like {post?.likeCount || 0}
+        </Button>
+
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(deletePost(post._id))}
+        >
+          <DeleteIcon fontSize="small" /> Delete
+        </Button>
       </CardActions>
     </Card>
   );

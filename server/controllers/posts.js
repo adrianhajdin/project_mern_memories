@@ -28,15 +28,19 @@ export const getPost = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-    const { title, message, selectedFile, creator, tags } = req.body;
-
-    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
-
     try {
-        await newPostMessage.save();
-
-        res.status(201).json(newPostMessage );
+        const { title, message, selectedFile, creator, tags } = req.body;
+        
+        const newPost = await PostMessage.create({
+            title,
+            message,
+            selectedFile,
+            creator,
+            tags
+        });
+        res.status(201).json(newPost);
     } catch (error) {
+        console.log("Error in createPost");
         res.status(409).json({ message: error.message });
     }
 }
