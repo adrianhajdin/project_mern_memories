@@ -30,6 +30,9 @@ export const getPost = async (req, res) => {
 export const createPost = async (req, res) => {
     const { title, message, selectedFile, creator, tags } = req.body;
 
+    if(!title || !message || !selectedFile || !creator || !tags)
+        return res.json({message:"all fileds are required"})
+
     const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
 
     try {
