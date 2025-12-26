@@ -12,5 +12,19 @@ By the end of this video, you will have a strong understanding of how the MERN S
 ### [🌟 Become a top 1% Next.js 15 developer in only one course](https://jsmastery.pro/next15)
 ### [🚀 Land your dream programming job in 6 months](https://jsmastery.pro/masterclass)
 
-Setup:
-- run ```npm i && npm start``` for both client and server side to start the app
+## Setup
+- run `npm i && npm start` for both client and server side to start the app
+
+## Environment Setup
+
+This project requires MongoDB to run.
+
+Create a `.env` file inside the `server` folder and add the following:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+
+You can get your MongoDB connection string from MongoDB Atlas.
+
+The backend will run on `http://localhost:5000` and the frontend on `http://localhost:3000`.
